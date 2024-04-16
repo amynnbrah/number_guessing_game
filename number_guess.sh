@@ -20,7 +20,7 @@ INSERT_NEW_GAME=$($PSQL "update players set games_played = $INCREMENT_GAMES wher
 done
 fi
 SECRET=$(( ( RANDOM % 1000 )  + 1 ))
-NUMBER_OF_TRIES=0
+NUMBER_OF_TRIES=1
 ISITNUMBER='^[0-9]+$'
 
 echo "$SECRET"
@@ -33,7 +33,7 @@ do
 if ! [[ $PLAYER_GUESS =~ $ISITNUMBER ]]
 then
 echo "That is not an integer, guess again:"
-NUMBER_OF_TRIES=$NUMBER_OF_TRIES
+NUMBER_OF_TRIES=$((NUMBER_OF_TRIES-1))
 read PLAYER_GUESS
 fi
 NUMBER_OF_TRIES=$((NUMBER_OF_TRIES+1))
