@@ -9,5 +9,9 @@ if [[ -z $PLAYER_USERNAME ]]
 then
 echo "Welcome, $USERNAME! It looks like this is your first time here."
 else
-echo "Welcome back, $PLAYER_USERNAME!"
+PLAYER_INFO=$($PSQL "select * from players where username ilike '$USERNAME'")
+echo "$PLAYER_INFO" | while IFS="|" read ID USER GAMES BEST 
+do
+echo "Welcome back, $USER! You have played $GAMES games, and your best game took $BEST guesses."
+done
 fi
